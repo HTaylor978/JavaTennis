@@ -104,4 +104,11 @@ class ScoreTest {
         scorer.winningPoints("AAABBA");
         assertEquals("1-0 0:0", scorer.currentScore());
     }
+
+    @Test
+    public void testPlayer1WinsGameWithAdv() {
+        TennisScorer scorer = new TennisScorer();
+        scorer.winningPoints("AAABBBABABAA");
+        assertEquals("1-0 0:0", scorer.currentScore());
+    }
 }
