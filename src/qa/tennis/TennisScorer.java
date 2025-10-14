@@ -21,15 +21,21 @@ public class TennisScorer {
 	public String currentScore() {
 		char[] winningSequence = previousString.toCharArray();
 
-        if (previousString.equals("A")) {
-            return "15:0";
-        } else if (previousString.equals("AB")) {
-            return "15:15";
-        } else if (previousString.equals("ABA")) {
-            return "30:15";
+        int playerA = 0;
+        int playerB = 0;
+
+        for (char winner : winningSequence) {
+            if (winner == 'A') {
+                playerA += 15;
+            } else if (winner == 'B') {
+                playerB += 15;
+            }
         }
+
+        String playerAScore = Integer.toString(playerA);
+        String playerBScore = Integer.toString(playerB);
 		
-		return "0:0";
+		return playerAScore + ":" + playerBScore;
 	}
 
 	public Score getScore() {
