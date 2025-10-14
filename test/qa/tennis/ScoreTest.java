@@ -19,4 +19,12 @@ class ScoreTest {
         scorer.winningPoint('A');
         assertEquals("15:0", scorer.currentScore());
     }
+
+    @Test
+    public void testBothPlayersScore1PointScore15_15() {
+        TennisScorer scorer = new TennisScorer();
+        scorer.winningPoint('A');
+        scorer.winningPoint('B');
+        assertEquals("15:15", scorer.currentScore());
+    }
 }

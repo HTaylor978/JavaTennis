@@ -23,6 +23,8 @@ public class TennisScorer {
 
         if (previousString.equals("A")) {
             return "15:0";
+        } else if (previousString.equals("AB")) {
+            return "15:15";
         }
 		
 		return "0:0";
