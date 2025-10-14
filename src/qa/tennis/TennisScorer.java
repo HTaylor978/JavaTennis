@@ -19,46 +19,79 @@ public class TennisScorer {
 
 
 	public String currentScore() {
-		char[] winningSequence = previousString.toCharArray();
+        String[] scores = {"0", "15", "30", "40", "Adv"};
 
-        int playerA = 0;
-        int playerB = 0;
+        String playerA = scores[0],  playerB = scores[0];
+        int playerASets = 0, playerBSets = 0;
 
+        char[] winningSequence = previousString.toCharArray();
         for (char winner : winningSequence) {
-            if (winner == 'A') {
-                if (playerA < 30) {
-                    playerA += 15;
-                } else if (playerA == playerB && playerA == 40) {
-                    playerA += 5; // Advantage denoted as 45
-                } else {
-                    playerA += 10;
-                }
-            } else if (winner == 'B') {
-                if (playerB < 30) {
-                    playerB += 15;
-                } else if (playerA == playerB && playerB == 40) {
-                    playerB += 5; // Advantage denoted as 45
-                } else {
-                    playerB += 10;
-                }
+            switch (winner) {
+                case 'A':
+                    switch (playerA) {
+                        case "0":
+                            playerA = scores[1]; //15
+                            break;
+                        case "15":
+                            playerA = scores[2]; //30
+                            break;
+                        case "30":
+                            playerA = scores[3]; //40
+                            break;
+                        case "40":
+                            if (playerB.equals("40")) {
+                                playerA = scores[4]; // Adv
+                            } else if (playerB.equals("Adv")) {
+                                playerB = scores[3]; // B back to 40
+                            } else {
+                                playerA = playerB = scores[0]; // Win
+                                playerASets += 1;
+
+                            }
+                            break;
+                        case "Adv":
+                            playerA = playerB = scores[0]; // Win
+                            playerASets += 1;
+                            break;
+                    }
+                    break;
+                case 'B':
+                    switch (playerB) {
+                        case "0":
+                            playerB = scores[1]; //15
+                            break;
+                        case "15":
+                            playerB = scores[2]; //30
+                            break;
+                        case "30":
+                            playerB = scores[3]; //40
+                            break;
+                        case "40":
+                            if (playerA.equals("40")) {
+                                playerB = scores[4]; //Adv
+                            } else if (playerA.equals("Adv")) {
+                                playerA = scores[3]; // B back to 40
+                            } else {
+                                playerA = playerB = scores[0];
+                                playerBSets += 1;
+                            }
+                            break;
+                        case "Adv":
+                            playerA = playerB = scores[0];
+                            playerBSets += 1;
+                            break;
+                    }
+                    break;
             }
         }
 
-
-        String playerAScore;
-        String playerBScore;
-        if (playerA == 45) {
-            playerAScore = "Adv";
-            playerBScore = Integer.toString(playerB);
-        } else if (playerB == 45) {
-            playerBScore = "Adv";
-            playerAScore = Integer.toString(playerA);
-        } else {
-            playerAScore = Integer.toString(playerA);
-            playerBScore = Integer.toString(playerB);
+        // Format set
+        String set = "";
+        if (playerASets != 0 || playerBSets != 0) {
+            set = Integer.toString(playerASets) + "-" + Integer.toString(playerBSets) + " ";
         }
 
-		return playerAScore + ":" + playerBScore;
+		return set + playerA + ":" + playerB;
 	}
 
 	public Score getScore() {

@@ -90,4 +90,18 @@ class ScoreTest {
         scorer.winningPoint('A');
         assertEquals("Adv:40", scorer.currentScore());
     }
+
+    @Test
+    public void testAdvantageGoesAwayScore40_40() {
+        TennisScorer scorer = new TennisScorer();
+        scorer.winningPoints("AAABBBBA");
+        assertEquals("40:40", scorer.currentScore());
+    }
+
+    @Test
+    public void testPlayer1WinsGameNoAdv() {
+        TennisScorer scorer = new TennisScorer();
+        scorer.winningPoints("AAABBA");
+        assertEquals("1-0 0:0", scorer.currentScore());
+    }
 }
