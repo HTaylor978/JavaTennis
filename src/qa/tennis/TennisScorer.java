@@ -26,7 +26,11 @@ public class TennisScorer {
 
         for (char winner : winningSequence) {
             if (winner == 'A') {
-                playerA += 15;
+                if (playerA < 30) {
+                    playerA += 15;
+                } else {
+                    playerA += 10;
+                }
             } else if (winner == 'B') {
                 playerB += 15;
             }
