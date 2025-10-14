@@ -118,4 +118,16 @@ class ScoreTest {
         scorer.winningPoints("AAABBABBB");
         assertEquals("1-0 0:40", scorer.currentScore());
     }
+
+    @Test
+    public void testPlayer1Wins6GamesSoSetWon() {
+        TennisScorer scorer = new TennisScorer();
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        assertEquals("6-0 0:0", scorer.currentScore());
+    }
 }
