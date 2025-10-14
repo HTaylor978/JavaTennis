@@ -99,28 +99,28 @@ class ScoreTest {
     }
 
     @Test
-    public void testPlayer1WinsGameNoAdv() {
+    public void testPlayerAWinsGameNoAdv() {
         TennisScorer scorer = new TennisScorer();
         scorer.winningPoints("AAABBA");
         assertEquals("1-0 0:0", scorer.currentScore());
     }
 
     @Test
-    public void testPlayer1WinsGameWithAdv() {
+    public void testPlayerAWinsGameWithAdv() {
         TennisScorer scorer = new TennisScorer();
         scorer.winningPoints("AAABBBABABAA");
         assertEquals("1-0 0:0", scorer.currentScore());
     }
 
     @Test
-    public void testPlayer1WinsGameThenBScores3() {
+    public void testPlayerAWinsGameThenBScores3() {
         TennisScorer scorer = new TennisScorer();
         scorer.winningPoints("AAABBABBB");
         assertEquals("1-0 0:40", scorer.currentScore());
     }
 
     @Test
-    public void testPlayer1Wins6GamesSoSetWon() {
+    public void testPlayerAWins6GamesSoSetWon() {
         TennisScorer scorer = new TennisScorer();
         scorer.winningPoints("AAABBA");
         scorer.winningPoints("AAABBA");
@@ -132,7 +132,7 @@ class ScoreTest {
     }
 
     @Test
-    public void testPlayer1Wins7GamesSoSetWonAndSetScore1_0() {
+    public void testPlayerAWins7GamesSoSetWonAndSetScore1_0() {
         TennisScorer scorer = new TennisScorer();
         scorer.winningPoints("AAABBA");
         scorer.winningPoints("AAABBA");
@@ -145,7 +145,7 @@ class ScoreTest {
     }
 
     @Test
-    public void testPlayer1Wins4Player2Wins5GamesSetScore4_5ThenAScoresAdv() {
+    public void testPlayerAWins4PlayerBWins5GamesSetScore4_5ThenAScoresAdv() {
         TennisScorer scorer = new TennisScorer();
         scorer.winningPoints("AAABBA");
         scorer.winningPoints("AAABBA");
@@ -158,5 +158,33 @@ class ScoreTest {
         scorer.winningPoints("AABBBB");
         scorer.winningPoints("AAABBBA");
         assertEquals("4-5 Adv:40", scorer.currentScore());
+    }
+
+    @Test
+    public void testPlayerAWins3SetsPlayerBWins2() {
+        TennisScorer scorer = new TennisScorer();
+        // Set 1
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("ABBBB");
+
+        // Set 2
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AAABBBA");
+        assertEquals("4-6 3-5 Adv:40", scorer.currentScore());
     }
 }
