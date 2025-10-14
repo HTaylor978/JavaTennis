@@ -32,7 +32,11 @@ public class TennisScorer {
                     playerA += 10;
                 }
             } else if (winner == 'B') {
-                playerB += 15;
+                if (playerB < 30) {
+                    playerB += 15;
+                } else {
+                    playerB += 10;
+                }
             }
         }
 
