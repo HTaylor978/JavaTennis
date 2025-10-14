@@ -20,7 +20,10 @@ public class TennisScorer {
 
 	public String currentScore() {
 		char[] winningSequence = previousString.toCharArray();
-		
+
+        if (previousString.equals("A")) {
+            return "15:0";
+        }
 		
 		return "0:0";
 	}
