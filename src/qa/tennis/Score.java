@@ -12,10 +12,6 @@ public class Score {
 		playerBgames = new int[5];
 		playerAgameScore = "0";
 		playerBgameScore = "0";
-		
-		// remove these!
-		randomGameScore();
-		randomScore();
 	}
 	
 	public void nextSet() {
