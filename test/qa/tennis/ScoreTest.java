@@ -27,4 +27,13 @@ class ScoreTest {
         scorer.winningPoint('B');
         assertEquals("15:15", scorer.currentScore());
     }
+
+    @Test
+    public void testPlayerAScores2AndPlayerBScores1Score30_15() {
+        TennisScorer scorer = new TennisScorer();
+        scorer.winningPoint('A');
+        scorer.winningPoint('B');
+        scorer.winningPoint('A');
+        assertEquals("30:15", scorer.currentScore());
+    }
 }

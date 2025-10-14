@@ -25,6 +25,8 @@ public class TennisScorer {
             return "15:0";
         } else if (previousString.equals("AB")) {
             return "15:15";
+        } else if (previousString.equals("ABA")) {
+            return "30:15";
         }
 		
 		return "0:0";
