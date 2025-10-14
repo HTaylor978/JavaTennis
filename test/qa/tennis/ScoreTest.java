@@ -143,4 +143,20 @@ class ScoreTest {
         scorer.winningPoints("AAABBA");
         assertEquals("6-0 1-0 0:0", scorer.currentScore());
     }
+
+    @Test
+    public void testPlayer1Wins4Player2Wins5GamesSetScore4_5ThenAScoresAdv() {
+        TennisScorer scorer = new TennisScorer();
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AABBBB");
+        scorer.winningPoints("AAABBBA");
+        assertEquals("4-5 Adv:40", scorer.currentScore());
+    }
 }
