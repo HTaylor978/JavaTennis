@@ -23,6 +23,7 @@ public class TennisScorer {
 
         String playerA = scores[0],  playerB = scores[0];
         int playerASets = 0, playerBSets = 0;
+        String set = "";
 
         char[] winningSequence = previousString.toCharArray();
         for (char winner : winningSequence) {
@@ -46,12 +47,19 @@ public class TennisScorer {
                             } else {
                                 playerA = playerB = scores[0]; // Win
                                 playerASets += 1;
-
+                                if (playerASets == 6) {
+                                    set += formatSet(playerASets, playerBSets);
+                                    playerASets = playerBSets = 0;
+                                }
                             }
                             break;
                         case "Adv":
                             playerA = playerB = scores[0]; // Win
                             playerASets += 1;
+                            if (playerASets == 6) {
+                                set += formatSet(playerASets, playerBSets);
+                                playerASets = playerBSets = 0;
+                            }
                             break;
                     }
                     break;
@@ -74,11 +82,19 @@ public class TennisScorer {
                             } else {
                                 playerA = playerB = scores[0];
                                 playerBSets += 1;
+                                if (playerBSets == 6) {
+                                    set += formatSet(playerASets, playerBSets);
+                                    playerASets = playerBSets = 0;
+                                }
                             }
                             break;
                         case "Adv":
                             playerA = playerB = scores[0];
                             playerBSets += 1;
+                            if (playerBSets == 6) {
+                                set += formatSet(playerASets, playerBSets);
+                                playerASets = playerBSets = 0;
+                            }
                             break;
                     }
                     break;
@@ -86,10 +102,8 @@ public class TennisScorer {
         }
 
         // Format set
-        String set = "";
-        if (playerASets != 0 || playerBSets != 0) {
-            set = Integer.toString(playerASets) + "-" + Integer.toString(playerBSets) + " ";
-        }
+
+        set += formatSet(playerASets, playerBSets);
 
 		return set + playerA + ":" + playerB;
 	}
@@ -98,6 +112,12 @@ public class TennisScorer {
 		return score;
 	}
 	
-	
+	private String formatSet(int playerASets, int playerBSets) {
+        String set = "";
+        if (playerASets != 0 || playerBSets != 0) {
+            set = Integer.toString(playerASets) + "-" + Integer.toString(playerBSets) + " ";
+        }
+        return set;
+    }
 
 }

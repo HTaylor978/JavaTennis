@@ -130,4 +130,17 @@ class ScoreTest {
         scorer.winningPoints("AAABBA");
         assertEquals("6-0 0:0", scorer.currentScore());
     }
+
+    @Test
+    public void testPlayer1Wins7GamesSoSetWonAndSetScore1_0() {
+        TennisScorer scorer = new TennisScorer();
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        scorer.winningPoints("AAABBA");
+        assertEquals("6-0 1-0 0:0", scorer.currentScore());
+    }
 }
