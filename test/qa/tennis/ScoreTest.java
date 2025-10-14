@@ -45,4 +45,14 @@ class ScoreTest {
         scorer.winningPoint('B');
         assertEquals("30:15", scorer.currentScore());
     }
+
+    @Test
+    public void testPlayerAScores2AndPlayerBScores2DifferentOrderScore30_30() {
+        TennisScorer scorer = new TennisScorer();
+        scorer.winningPoint('A');
+        scorer.winningPoint('A');
+        scorer.winningPoint('B');
+        scorer.winningPoint('B');
+        assertEquals("30:30", scorer.currentScore());
+    }
 }
