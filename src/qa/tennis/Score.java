@@ -20,15 +20,18 @@ public class Score {
 
 
 	public String toString() {
-		return "";
+        String set = "";
+        for (int i = 0; i < currentSet; i++) {
+            if (playerAgames[i] != 0 || playerBgames[i] != 0) {
+                set += Integer.toString(playerAgames[i]) + "-" + Integer.toString(playerBgames[i]) + " ";
+            }
+        }
+		return set + playerAgameScore + ":" + playerBgameScore;
 	}
 
-	public String getPlayerAgameScore() {
-		return playerAgameScore;
-	}
-	public String getPlayerBgameScore() {
-		return playerBgameScore;
-	}
+    // Getters
+	public String getPlayerAgameScore() {return playerAgameScore;}
+	public String getPlayerBgameScore() {return playerBgameScore;}
     public int getCurrentSet() {
         return currentSet;
     }
@@ -37,13 +40,10 @@ public class Score {
         return playerBgames;
     }
 
-    public void setPlayerAgameScore(String playerAgameScore) {
-        this.playerAgameScore = playerAgameScore;
-    }
-    public void setPlayerBgameScore(String playerBgameScore) {
-		this.playerBgameScore = playerBgameScore;
-	}
-	public void setCurrentSet(int currentSet) {
-		this.currentSet = currentSet;
-	}
+    // Setters
+    public void setPlayerAgameScore(String playerAgameScore) {this.playerAgameScore = playerAgameScore;}
+    public void setPlayerBgameScore(String playerBgameScore) {this.playerBgameScore = playerBgameScore;}
+	public void setCurrentSet(int currentSet) {this.currentSet = currentSet;}
+    public void setPlayerAgames(int playerAgameScore) {this.playerAgames[currentSet - 1] = playerAgameScore;}
+    public void setPlayerBgames(int playerBgameScore) {this.playerBgames[currentSet - 1] = playerBgameScore;}
 }
