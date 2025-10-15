@@ -3,6 +3,7 @@ package qa.tennis;
 public class TennisScorer {
 	private Score score;
 	private String previousString;
+    private static final String[] scores = {"0", "15", "30", "40", "Adv"};
 	
 	public TennisScorer() {
 		score = new Score();
@@ -19,7 +20,6 @@ public class TennisScorer {
 
 
 	public String currentScore() {
-        String[] scores = {"0", "15", "30", "40", "Adv"};
 
         String playerA = scores[0],  playerB = scores[0];
         int playerASets = 0, playerBSets = 0;
