@@ -48,6 +48,11 @@ public class TennisScorer {
                                 playerA = playerB = scores[0]; // Win
                                 playerASets += 1;
                                 if (playerASets == 6) {
+                                    if (playerBSets < 5) {
+                                        set += formatSet(playerASets, playerBSets);
+                                        playerASets = playerBSets = 0;
+                                    }
+                                } else if (playerASets == 7) {
                                     set += formatSet(playerASets, playerBSets);
                                     playerASets = playerBSets = 0;
                                 }
@@ -57,6 +62,11 @@ public class TennisScorer {
                             playerA = playerB = scores[0]; // Win
                             playerASets += 1;
                             if (playerASets == 6) {
+                                if (playerBSets < 5) {
+                                    set += formatSet(playerASets, playerBSets);
+                                    playerASets = playerBSets = 0;
+                                }
+                            } else if (playerASets == 7) {
                                 set += formatSet(playerASets, playerBSets);
                                 playerASets = playerBSets = 0;
                             }
@@ -78,11 +88,16 @@ public class TennisScorer {
                             if (playerA.equals("40")) {
                                 playerB = scores[4]; //Adv
                             } else if (playerA.equals("Adv")) {
-                                playerA = scores[3]; // B back to 40
+                                playerA = scores[3]; // A back to 40
                             } else {
                                 playerA = playerB = scores[0];
                                 playerBSets += 1;
                                 if (playerBSets == 6) {
+                                    if (playerASets < 5) {
+                                        set += formatSet(playerASets, playerBSets);
+                                        playerASets = playerBSets = 0;
+                                    }
+                                } else if (playerBSets == 7) {
                                     set += formatSet(playerASets, playerBSets);
                                     playerASets = playerBSets = 0;
                                 }
@@ -92,6 +107,11 @@ public class TennisScorer {
                             playerA = playerB = scores[0];
                             playerBSets += 1;
                             if (playerBSets == 6) {
+                                if (playerASets < 5) {
+                                    set += formatSet(playerASets, playerBSets);
+                                    playerASets = playerBSets = 0;
+                                }
+                            } else if (playerBSets == 7) {
                                 set += formatSet(playerASets, playerBSets);
                                 playerASets = playerBSets = 0;
                             }

@@ -88,6 +88,8 @@ public class GraphicalScore extends Frame {
 	}
 	
 	public void populate() {
+
+        scorer.currentScore();
 		Score score = scorer.getScore();
 		for (int i=0; i<5; i++) {
 			gamesLabels[0][i].setText(""+score.getPlayerAgames()[i]);

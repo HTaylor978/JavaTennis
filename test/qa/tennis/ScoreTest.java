@@ -187,4 +187,43 @@ class ScoreTest {
         scorer.winningPoints("AAABBBA");
         assertEquals("4-6 3-5 Adv:40", scorer.currentScore());
     }
+
+    @Test
+    public void testTiebreakPlayerAWinsSetScore7_5() {
+        TennisScorer scorer = new TennisScorer();
+        // Set 1
+        scorer.winningPoints("AAABBA"); // 1-0
+        scorer.winningPoints("AAABBA"); // 2-0
+        scorer.winningPoints("AAABBA"); // 3-0
+        scorer.winningPoints("AAABBA"); // 4-0
+        scorer.winningPoints("AABBBB"); // 4-1
+        scorer.winningPoints("AABBBB"); // 4-2
+        scorer.winningPoints("AABBBB"); // 4-3
+        scorer.winningPoints("AABBBB"); // 4-4
+        scorer.winningPoints("AABBBB"); // 4-5
+        scorer.winningPoints("AAAA"); // 5-5
+        scorer.winningPoints("AAAA"); // 6-5
+        scorer.winningPoints("AAAA"); // 7-5
+        assertEquals("7-5 0:0", scorer.currentScore());
+    }
+
+    @Test
+    public void testTiebreakPlayerBWinsSetScore6_7() {
+        TennisScorer scorer = new TennisScorer();
+        // Set 1
+        scorer.winningPoints("AAABBA"); // 1-0
+        scorer.winningPoints("AAABBA"); // 2-0
+        scorer.winningPoints("AAABBA"); // 3-0
+        scorer.winningPoints("AAABBA"); // 4-0
+        scorer.winningPoints("AABBBB"); // 4-1
+        scorer.winningPoints("AABBBB"); // 4-2
+        scorer.winningPoints("AABBBB"); // 4-3
+        scorer.winningPoints("AABBBB"); // 4-4
+        scorer.winningPoints("AABBBB"); // 4-5
+        scorer.winningPoints("AAAA"); // 5-5
+        scorer.winningPoints("AAAA"); // 6-5
+        scorer.winningPoints("BBBB"); // 6-6
+        scorer.winningPoints("BBBB"); // 6-7
+        assertEquals("6-7 0:0", scorer.currentScore());
+    }
 }
