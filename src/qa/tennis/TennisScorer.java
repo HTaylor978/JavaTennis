@@ -7,10 +7,20 @@ public class TennisScorer {
     private static final int LOVE = 0;
     private static final int FORTY = 3;
     private static final int ADVANTAGE = 4;
+    private int playerAGames;
+    private int playerBGames;
+    private int playerA;
+    private int playerB;
 	
 	public TennisScorer() {
 		score = new Score();
 		previousString = "";
+
+        // Initialise params
+        playerA = LOVE;
+        playerB = LOVE;
+        playerAGames = 0;
+        playerBGames = 0;
 	}
 	
 	public void winningPoint(char player) {
@@ -23,11 +33,6 @@ public class TennisScorer {
 
 
 	public String currentScore() {
-
-        int playerA = LOVE,  playerB = LOVE;
-        int playerAGames = 0, playerBGames = 0;
-//        String set = "";
-
         char[] winningSequence = previousString.toCharArray();
         for (char winner : winningSequence) {
             switch (winner) {
@@ -39,12 +44,12 @@ public class TennisScorer {
                         if (playerB == ADVANTAGE) {
                             // Reset to deuce
                             playerA = playerB = FORTY;
-                        } else {
-                            // playerA has won the game
-                            // Reset score to 0:0
-                            playerAGames++;
-                            playerA = playerB = LOVE;
+                        } else if (playerB < FORTY) {
+                            playerWonGame('A');
                         }
+                        break;
+                    } else if (playerA > ADVANTAGE) {
+                        playerWonGame('A');
                         break;
                     } else {
                         break;
@@ -57,73 +62,24 @@ public class TennisScorer {
                         if (playerA == ADVANTAGE) {
                             // Reset to deuce
                             playerA = playerB = FORTY;
-                        } else {
-                            // playerB has won the game
-                            // Reset score to 0:0
-                            playerBGames++;
-                            playerA = playerB = LOVE;
+                        } else if (playerA < FORTY) {
+                            playerWonGame('B');
                         }
+                        break;
+                    } else if (playerB > ADVANTAGE) {
+                        playerWonGame('B');
                         break;
                     } else {
                         break;
                     }
             }
         }
-//                case 'B':
-//                    switch (playerB) {
-//                        case "0":
-//                            playerB = scores[1]; //15
-//                            break;
-//                        case "15":
-//                            playerB = scores[2]; //30
-//                            break;
-//                        case "30":
-//                            playerB = scores[3]; //40
-//                            break;
-//                        case "40":
-//                            if (playerA.equals("40")) {
-//                                playerB = scores[4]; //Adv
-//                            } else if (playerA.equals("Adv")) {
-//                                playerA = scores[3]; // A back to 40
-//                            } else {
-//                                playerA = playerB = scores[0];
-//                                playerBSets += 1;
-//                                if (playerBSets == 6) {
-//                                    if (playerASets < 5) {
-//                                        set += formatSet(playerASets, playerBSets);
-//                                        playerASets = playerBSets = 0;
-//                                    }
-//                                } else if (playerBSets == 7) {
-//                                    set += formatSet(playerASets, playerBSets);
-//                                    playerASets = playerBSets = 0;
-//                                }
-//                            }
-//                            break;
-//                        case "Adv":
-//                            playerA = playerB = scores[0];
-//                            playerBSets += 1;
-//                            if (playerBSets == 6) {
-//                                if (playerASets < 5) {
-//                                    set += formatSet(playerASets, playerBSets);
-//                                    playerASets = playerBSets = 0;
-//                                }
-//                            } else if (playerBSets == 7) {
-//                                set += formatSet(playerASets, playerBSets);
-//                                playerASets = playerBSets = 0;
-//                            }
-//                            break;
-//                    }
-//                    break;
-//            }
-//        }
 
-        // Format set
-
-        //set += formatSet(playerASets, playerBSets);
-
-        // Set score of current set
-        score.setPlayerAgames(playerAGames);
-        score.setPlayerBgames(playerBGames);
+        if (playerAGames > 0 || playerBGames > 0) {
+            // Set score of current set
+            score.setPlayerAgames(playerAGames);
+            score.setPlayerBgames(playerBGames);
+        }
 
         // Set score of current game
         score.setPlayerAgameScore(scores[playerA]);
@@ -136,12 +92,41 @@ public class TennisScorer {
 		return score;
 	}
 	
-	private String formatSet(int playerASets, int playerBSets) {
-        String set = "";
-        if (playerASets != 0 || playerBSets != 0) {
-            set = Integer.toString(playerASets) + "-" + Integer.toString(playerBSets) + " ";
-        }
-        return set;
+	private void playerWonSet() {
+        // Set score of current set
+        score.setPlayerAgames(playerAGames);
+        score.setPlayerBgames(playerBGames);
+        score.nextSet();
+        playerAGames = playerBGames = 0;
     }
 
+    private void playerWonGame(char winningPlayer) {
+        // player has won the game
+        if (winningPlayer == 'A') {
+            playerAGames++;
+
+            // Player A wins set
+            if (playerAGames == 6) {
+                if (playerBGames < 5) {
+                    playerWonSet();
+                }
+            } else if (playerAGames == 7) {
+                playerWonSet();
+            }
+        } else {
+            playerBGames++;
+
+            // Player B wins set
+            if (playerBGames == 6) {
+                if (playerAGames < 5) {
+                    playerWonSet();
+                }
+            } else if (playerBGames == 7) {
+                playerWonSet();
+            }
+        }
+
+        // Reset score to 0:0
+        playerA = playerB = LOVE;
+    }
 }
